@@ -1,3 +1,5 @@
+import glob
+
 TEST_SIZE = 60 #1 hour
 #declare blank list to start
 altList = [[0 for x in xrange(4)] for x in xrange(TEST_SIZE)]
@@ -22,6 +24,9 @@ def alt(temp, amount, start, end):
 
 def do():
 	resetList()
-	alt(0, 0.1, 0, 3)
-	writeList('testtest.txt')
+	for filename in glob.glob("tests/spec.*.txt"):
+		with open(filename, 'r') as f:
+			exec(f.read())
+		writeList('tests/test.'+filename.split('spec.')[1].split('.txt')[0]+'.txt')
+		resetList()
 do()
