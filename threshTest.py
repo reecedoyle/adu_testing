@@ -1,6 +1,11 @@
-import thresholds.py
-
-for testname in glob.glob("tests/scores.*.*.txt"):
-	for x in xrange(0,6):
-		testname.split('test.')[1].split('.')[1].split('.txt')[0]
-		runTest(testname, 'tests/thresholds.'+testname.split('test.')[1].split('.txt')[0]+'.'+repr(x)+'.txt', x)
+#import thresholds.py
+import glob
+#'thresholds.'+testNum+'.'+scoreNum+'.txt'
+scoreFiles = []
+for filename in sorted(glob.glob("scores/scores.*.*.txt")):
+	testNum, scoreNum = [int(x) for x in filename.split('scores.')[1].split('.txt')[0].split('.')]
+	if len(scoreFiles) == testNum:
+		scoreFiles.append([])
+	scoreFiles[testNum].append(filename)
+print scoreFiles
+#runTest(scoreFiles)
