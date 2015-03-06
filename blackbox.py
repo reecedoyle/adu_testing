@@ -2,7 +2,7 @@ import math
 from random import randint
 import glob
 
-WINDOW_SIZE = 3
+WINDOW_SIZE = 3000
 BANDWIDTH = [0.302494, 0.597704, 0.467658, 0.768034]
 
 def num(s):
@@ -43,16 +43,21 @@ def runTest(testIn, temperaturesIn, scoresOut, offset):
 						score += calcScore(testList[count], values[1:])
 						tempCount += 1
 			#limit score
-			score = 1/score
-			if score > 1:
+			if score == 0:
 				score = 1
+			else:
+				score = 1/score
+				if score > 1:
+					score = 1
 			#WRITE SCORES TO FILE OR WHATEVER
 			scores.write('%f\n'%score)
 			count += 1 #keep track of line in the test file
 
 for testname in glob.glob("tests/test.*.txt"):
 	for x in xrange(0,6):
-		runTest(testname, 'temperatures.log', 'tests/scores.'+testname.split('test.')[1].split('.txt')[0]+'.'+repr(x)+'.txt', x)
+		testNum = testname.split('test.')[1].split('.txt')[0]
+		scoreFile = 'scores/scores.'+testNum+'.'+repr(x)+'.txt'
+		runTest(testname, 'temperatures.log', scoreFile, x)
 
 
 

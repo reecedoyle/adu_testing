@@ -24,9 +24,11 @@ def alt(temp, amount, start, end):
 
 def do():
 	resetList()
-	for filename in glob.glob("tests/spec.*.txt"):
+	for filename in glob.glob("specs/spec.*.txt"):
 		with open(filename, 'r') as f:
 			exec(f.read())
-		writeList('tests/test.'+filename.split('spec.')[1].split('.txt')[0]+'.txt')
+		specNum = filename.split('spec.')[1].split('.txt')[0]
+		newFile = 'tests/test.'+specNum+'.txt'
+		writeList(newFile)
 		resetList()
 do()
