@@ -2,3 +2,4 @@ tests/
 specs/
 scores/
 classifications/
+*.txt
