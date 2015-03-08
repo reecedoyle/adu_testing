@@ -10,8 +10,8 @@ def runTest(files):
 	prevScores = []
 	amber = AMBER_DEFAULT
 	red = RED_DEFAULT
-	print 'Amber (start): %s'%amber
-	print 'Red (start): %s'%red
+	#print 'Amber (start): %s'%amber
+	#print 'Red (start): %s'%red
 	for filename in files:
 		classFilename = 'classifications/classification.'+filename.split('scores.')[1]
 		if first:
@@ -19,8 +19,8 @@ def runTest(files):
 		else:
 			#set thresholds
 			amber, red = getAutoThresh(prevScores, amber, red)
-			print 'Amber: %s'%amber
-			print 'Red: %s'%red
+			#print 'Amber: %s'%amber
+			#print 'Red: %s'%red
 			prevScores = []
 		with open(filename, 'r') as scores, open(classFilename, 'w') as classFile:
 			classFile.write('Amber: %s, Red: %s\n'%(amber, red))
@@ -47,9 +47,9 @@ def getAutoThresh(scores, prevAmber, prevRed):
 def getThreshold(percentage, points):
 	points = sorted(points)
 	index = (len(points)-1) - int((len(points)*percentage))
-	print points
-	print 'Index: %d'%index
-	print 'Return: %f'%((points[index] + points[index-1])/2)
+	#print points
+	#print 'Index: %d'%index
+	#print 'Return: %f'%((points[index] + points[index-1])/2)
 	return (points[index] + points[index-1])/2
 
 def do():
