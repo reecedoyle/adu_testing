@@ -1,4 +1,4 @@
-tests
-specs
-scores
-classifications
+tests/
+specs/
+scores/
+classifications/
